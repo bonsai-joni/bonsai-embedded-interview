@@ -1,6 +1,17 @@
 #include <stdint.h>
 #include <stddef.h>
-#include <stdbool.h>
+
+/*
+ * Frame format
+ *
+ *   Byte 0:     0xAA (start marker)
+ *   Byte 1:     LEN  (number of payload bytes, 0-255)
+ *   Byte 2..N:  Payload (LEN bytes)
+ *
+ * Example:
+ *   Input:  {0x00, 0xFF, 0xAA, 0x03, 0x10, 0x20, 0x30, 0x00}
+ *   Result: len=3, payload={0x10, 0x20, 0x30}
+ */
 
 typedef struct {
     uint8_t payload[256];
